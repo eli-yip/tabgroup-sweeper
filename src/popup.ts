@@ -35,6 +35,10 @@ function setStatus(text: string, color: string): void {
   statusEl.style.color = color;
 }
 
+function plural(n: number, word: string): string {
+  return `${n} ${word}${n === 1 ? "" : "s"}`;
+}
+
 // One row per tab group, across all windows, with the live tab ids in it.
 async function collectGroups(): Promise<GroupRow[]> {
   const [groups, tabs] = await Promise.all([
@@ -65,8 +69,8 @@ function render(rows: GroupRow[]): void {
 
   if (totalTabs === 0) {
     sweepBtn.disabled = true;
-    sweepBtn.textContent = "没有分组标签页";
-    setStatus("当前没有任何标签组", "#888");
+    sweepBtn.textContent = "No grouped tabs";
+    setStatus("No tab groups right now", "#888");
     return;
   }
 
@@ -82,7 +86,7 @@ function render(rows: GroupRow[]): void {
 
     const name = document.createElement("span");
     name.className = "name";
-    name.textContent = r.title || "(未命名)";
+    name.textContent = r.title || "(untitled)";
 
     const count = document.createElement("span");
     count.className = "count";
@@ -94,7 +98,7 @@ function render(rows: GroupRow[]): void {
 
   const groupCount = rows.filter((r) => r.tabIds.length > 0).length;
   sweepBtn.disabled = false;
-  sweepBtn.textContent = `关闭 ${totalTabs} 个标签页（${groupCount} 个分组）`;
+  sweepBtn.textContent = `Close ${plural(totalTabs, "tab")} in ${plural(groupCount, "group")}`;
   setStatus("", "#888");
 }
 
@@ -111,10 +115,10 @@ sweepBtn?.addEventListener("click", async () => {
 
     await chrome.tabs.remove(ids);
     await refresh();
-    setStatus(`已关闭 ${ids.length} 个标签页`, "green");
+    setStatus(`Closed ${plural(ids.length, "tab")}`, "green");
   } catch (error) {
     setStatus(
-      `失败：${error instanceof Error ? error.message : String(error)}`,
+      `Failed: ${error instanceof Error ? error.message : String(error)}`,
       "red",
     );
   }
