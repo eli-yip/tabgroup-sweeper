@@ -21,3 +21,13 @@ choose **Load unpacked**, and select the `public/` directory.
 Click the toolbar icon. The popup lists each tab group (color, name, tab count);
 the button closes all of those tabs at once. Tabs that are not in any group are
 left untouched.
+
+## Related
+
+[tabgroups](https://github.com/eli-yip/tabgroups) is a companion CLI that
+**exports** your tab groups (Markdown / HTML / JSON / CSV) and can LLM-classify
+them — a handy backup to run before you sweep.
+
+## License
+
+[MIT](LICENSE)
