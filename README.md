@@ -1,5 +1,7 @@
 # tabgroup-sweeper
 
+> [中文文档](README.zh.md)
+
 A tiny Chromium (Manifest V3) extension that **closes every tab belonging to a
 tab group, and leaves ungrouped tabs open**. Click the toolbar icon, see the
 groups it found, hit the button.
