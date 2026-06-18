@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tab Group Sweeper</title>
+    <style>
+      body {
+        width: 300px;
+        padding: 12px;
+        font-family: -apple-system, system-ui, Arial, sans-serif;
+        margin: 0;
+      }
+      h1 {
+        font-size: 13px;
+        margin: 0 0 8px;
+        color: #444;
+      }
+      #groupList {
+        margin: 0 0 10px;
+        max-height: 320px;
+        overflow-y: auto;
+      }
+      .group-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 2px;
+        font-size: 13px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex: 0 0 auto;
+      }
+      .name {
+        flex: 1 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #222;
+      }
+      .count {
+        flex: 0 0 auto;
+        color: #888;
+        font-variant-numeric: tabular-nums;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.6;
+      }
+      #status {
+        margin-top: 8px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+        color: #888;
+        min-height: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>属于标签组的标签页</h1>
+    <div id="groupList"></div>
+    <button id="sweepBtn" type="button" disabled>加载中…</button>
+    <div id="status"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>
