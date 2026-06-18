@@ -5,13 +5,26 @@ job: **close every tab that belongs to a tab group, and leave ungrouped tabs
 open.** It is a toolbar action with a popup that lists the current tab groups and
 a button to sweep them.
 
-It is a sibling of, but independent from, `tabgroups-export` (a Python CLI that
-parses the on-disk SNSS session file). This extension does **not** read session
-files — it reads live tab-group membership directly from the browser via the
-`chrome.tabGroups` / `chrome.tabs` APIs, which is exact (no URL matching, no
-heuristics).
-
 Keep it simple. It is a single-purpose extension; resist scope creep.
+
+## Related project
+
+There is a sibling project, **[tabgroups](https://github.com/eli-yip/tabgroups)**
+(a Python CLI, the `tabgroups-export` repo), typically checked out next to this
+one (`../tabgroups-export`). The two are **orthogonal**, and the split is
+deliberate:
+
+- **tabgroups (CLI)** is read-only: it parses the on-disk SNSS session file and
+  **exports** tab groups (tree / md / json / html / csv), and can LLM-classify
+  them. It never touches the running browser.
+- **This extension** acts on the *live* browser, reading tab-group membership
+  directly via `chrome.tabGroups` / `chrome.tabs` (exact — no URL matching, no
+  heuristics) and closing those tabs.
+
+So **do not add SNSS parsing or export/classify features here**, and do not add
+live-browser control to the CLI. Closing grouped tabs was considered as a CLI
+subcommand and rejected in favour of this extension, because only an extension
+can read tab-group membership exactly. See `docs/specs/` in both repos.
 
 ## Stack & layout
 
